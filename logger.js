@@ -20,7 +20,9 @@ module.exports = {
 	log(msg) {
 		return new Promise((resolve, reject) => {
 			let logStream = fs.createWriteStream(LOG_FILE_PATH, {'flags': 'a'});
-			logStream.end(this.getLogStr(msg));
+			logStream.end(this.getLogStr(msg), () => {
+				resolve();
+			});
 		});
 	}
 

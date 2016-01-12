@@ -2,6 +2,7 @@
 
 const robot = require("robotjs");
 const keypress = require('keypress');
+const logger = require("./logger");
 
 
 const TIMEOUT = 30000;
@@ -13,12 +14,14 @@ module.exports = {
 		const start = Date.now();
 		return new Promise((resolve, reject) => {
 			(function check() {
-				if(robot.getPixelColor(coords.x, coords.y) === color)
+				if(robot.getPixelColor(coords.x, coords.y) === color) {
+					logger.log(`Success: ${action}`)
 					resolve();
-				else if(Date.now() - start < TIMEOUT)
+				} else if(Date.now() - start < TIMEOUT) {
 					setTimeout(check, 500);
-				else
+				} else {
 					reject(`Error ${action}, wait for ${coords} ${color}`);
+				}
 			})();
 		});
 	},
