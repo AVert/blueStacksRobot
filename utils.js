@@ -1,7 +1,10 @@
+'use strict';
+
 const robot = require("robotjs");
+const keypress = require('keypress');
+
 
 const TIMEOUT = 30000;
-
 const SCROLL_DELAY = 1000;
 
 module.exports = {
@@ -30,6 +33,22 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => resolve(), time);
 		});
-	}
+	},
 
+	initKeyPressLogger() {
+		keypress(process.stdin);
+
+		// listen for the "keypress" event
+		process.stdin.on('keypress', (ch, key) => {
+			let coords = robot.getMousePos();
+			console.log(coords, robot.getPixelColor(coords.x, coords.y));
+			if(key && key.ctrl && key.name == 'c')
+				process.exit(1);
+		});
+
+		process.stdin.setRawMode(true);
+		process.stdin.resume();
+	}
 }
+
+
