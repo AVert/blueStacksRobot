@@ -4,6 +4,7 @@ const utils = require("./utils");
 module.exports = {
 
 	open() {
+		logger.log('startings...');
 		utils.click({x: 499, y: 867})
 
 		return utils.waitUntil({x: 884, y: 38}, 'b46464', 'Opening launchpad')

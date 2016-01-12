@@ -43,7 +43,7 @@ module.exports = {
 			let coords = robot.getMousePos();
 			console.log(coords, robot.getPixelColor(coords.x, coords.y));
 			if(key && key.ctrl && key.name == 'c')
-				process.exit(1);
+				process.exit();
 		});
 
 		process.stdin.setRawMode(true);
