@@ -8,7 +8,7 @@ logger.log('Process started');
 utils.initKeyPressLogger();
 
 // Every day at 00:00 and 06:00
-schedule.scheduleJob('* * 0,6,13 * * *', () => {
+schedule.scheduleJob('0 0 0,6 * * *', () => {
 	logger.log('Startings...');
 	blueStacks.open()
 		.then(() => blueStacks.launchClashOfClans())
