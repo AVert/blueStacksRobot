@@ -43,9 +43,13 @@ module.exports = {
 			// daily reward
 			.then(() => utils.click({x: 33, y: 475}))
 			.then(() => utils.waitUntil({x: 248, y: 391}, '942c29', 'Opening daily reward dlg'))
-			// добавить проверку на синюю кнопку
-			// if(robot.getPixelColor(0, 0) === '434343')
-			// .then(() => utils.click({x: 624, y: 476}))
+			// if daily reward exists, receive it
+			.then(() => {
+				if(robot.getPixelColor(626, 470) === '7382bd')
+					return utils.click({x: 624, y: 476})
+				else
+					return Promise.resolve();
+			})
 			.then(() => utils.click({x: 248, y: 391}))
 			.then(() => utils.waitUntil({x: 639, y: 648}, '42385a', 'Daily reward dlg has been tab changed'))
 			.then(() => utils.click({x: 604, y: 694}))
@@ -94,6 +98,7 @@ module.exports = {
 
 	collectDragon() {
 		return Promise.resolve()
+			.then(() => logger.log('Collecting dragons'))
 			.then(() => robot.moveMouseSmooth(374, 602))
 			// scroll to top left corner
 			.then(() => {
@@ -134,9 +139,36 @@ module.exports = {
 			.then(() => utils.click({x: 661, y: 390}))	
 	},
 
+	collectBlueCrystals() {
+		return Promise.resolve()
+			.then(() => logger.log('Collecting blue crystals'))
+			.then(() => robot.moveMouseSmooth(374, 602))
+			// scroll to top right corner
+			.then(() => utils.scrollTop())
+			.then(() => utils.scrollRight())
+			// click to portal
+			.then(() => utils.click({x: 627, y: 638}))
+			.then(() => utils.waitUntil({x: 755, y: 385}, 'f77108', 'Blue crystal dungeon has been opened'))
+			// zoom out to max
+			.then(() => utils.zoomOut())
+			// scroll to top left corner
+			.then(() => utils.scrollTop())
+			.then(() => utils.scrollLeft())
+			// collect crystals
+			.then(() => {
+				const coords = [{x:390,y:468}, {x:351,y:494}, {x:280,y:494}, {x:279,y:552}, {x:277,y:605}, {x:356,y:607}, {x:431,y:603}, {x:501,y:546}, {x:465,y:470}, {x:540,y:466}, {x:539,y:524}, {x:579,y:604}];
+				return coords.reduce((previous, item) => {
+					return previous
+						.then(() => utils.delay(1000))
+						.then(() => utils.click({x: item.x, y: item.y}))
+				}, Promise.resolve());
+			})
+			.then(() => utils.click({x: 755, y: 385}))
+	},
+
 	close() {
 		utils.click({x: 14, y: 343});
-		logger.log('Closing BlueStacks');
+		logger.log('Closing BlueStacks\n\n');
 	}
 
 }
