@@ -22,8 +22,10 @@ module.exports = {
 			.then(() => utils.waitUntil({x: 100, y: 655}, 'fbddca', 'Searching Castle Clash'))
 			.then(() => utils.click({x: 100, y: 655}))
 			.then(() => utils.waitUntil({x: 681, y: 390}, 'ff8e00', 'Waiting castle clash loading'))
-			// Close window that usually appears on app start
-			.then(() => utils.click({x: 681, y: 390}));
+			// Close window about attacks and  that usually appears on app start
+			.then(() => utils.click({x: 664, y: 406}))
+			.then(() => utils.delay(500))
+			.then(() => utils.click({x: 664, y: 406}))
 	},
 
 	collectDailyReward() {
@@ -36,48 +38,81 @@ module.exports = {
 			.then(() => utils.click({x: 20, y: 370}))
 			.then(utils.waitUntil({x: 579, y: 644}, 'f7cf84', 'Opening rang daily reward'))
 			.then(() => utils.click({x: 446, y: 745}))
+			.then(() => utils.delay(500))
 			.then(() => utils.click({x: 663, y: 386}))
 			// daily reward
 			.then(() => utils.click({x: 33, y: 475}))
 			.then(() => utils.waitUntil({x: 248, y: 391}, '942c29', 'Opening daily reward dlg'))
+			// добавить проверку на синюю кнопку
+			// if(robot.getPixelColor(0, 0) === '434343')
+			// .then(() => utils.click({x: 624, y: 476}))
 			.then(() => utils.click({x: 248, y: 391}))
-			.then(() => utils.waitUntil({x: 639, y: 648}, '42385a', 'Daily reward dlg tab changed'))
+			.then(() => utils.waitUntil({x: 639, y: 648}, '42385a', 'Daily reward dlg has been tab changed'))
 			.then(() => utils.click({x: 604, y: 694}))
 			.then(() => utils.click({x: 679, y: 394}));
+	},
+
+	collectDungeons() {
+		return Promise.resolve()
+			.then(() => logger.log('Collecting dunfeons'))
+			.then(() => utils.click({x: 40, y: 789}))
+			.then(() => utils.delay(1000))
+			.then(() => utils.click({x: 150, y: 759}))
+			.then(() => utils.waitUntil({x: 306, y: 398}, 'a53031', 'Dungeon dlg has been opened'))
+			.then(() => utils.click({x: 306, y: 398}))
+			.then(() => utils.waitUntil({x: 441, y: 633}, 'f7df9c', 'Dungeon dlg tab has been changed'))
+			.then(() => utils.click({x: 441, y: 633}))
+			.then(() => utils.delay(500))
+			.then(() => robot.keyToggle('z', 'down', 'shift'))
+			.then(() => {
+				return Array(6).fill().reduce((previous, item) => {
+					return previous
+						.then(() => utils.delay(500))
+						.then(() => robot.scrollMouse(200, 'down'))
+				}, Promise.resolve());
+			})
+			.then(() => utils.delay(1000))
+			.then(() => robot.keyToggle('z', 'down'))
+			.then(() => utils.delay(1000))
+			.then(() => utils.click({x: 553, y: 567}))
+			.then(() => utils.delay(1000))
+			.then(() => utils.click({x: 481, y: 774}))
+			.then(() => {
+				return Array(20).fill().reduce((previous, item) => {
+					return previous
+						.then(() => utils.delay(1000))
+						.then(() => utils.click({x: 322, y: 787}))
+				}, Promise.resolve());
+			})
+			// or click close button if 'use entry map' dlg appears
+			.then(() => utils.delay(1000))
+			.then(() => utils.click({x: 555, y: 488}))
+			// close dungeon dlg
+			.then(() => utils.delay(1000))
+			.then(() => utils.click({x: 680, y: 387}))
 	},
 
 	collectDragon() {
 		return Promise.resolve()
 			.then(() => robot.moveMouseSmooth(374, 602))
 			// scroll to top left corner
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
+			.then(() => {
+				return Array(7).fill().reduce((previous, item) => {
+					return previous
+						.then(() => robot.scrollMouse(200, 'up'))
+						.then(() => utils.delay(500))
+				}, Promise.resolve());
+			})
 			.then(() => robot.keyToggle('z', 'down', 'shift'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
-			.then(() => utils.delay(500))
-			.then(() => robot.scrollMouse(200, 'up'))
+			.then(() => {
+				return Array(7).fill().reduce((previous, item) => {
+					return previous
+						.then(() => utils.delay(500))
+						.then(() => robot.scrollMouse(200, 'up'))
+				}, Promise.resolve());
+			})
 			.then(() => utils.delay(1000))
-			.then(() => robot.keyToggle('z', 'up', 'shift'))
+			.then(() => robot.keyToggle('z', 'down'))
 			// click to portal
 			.then(() => utils.click({x: 291, y: 616}))
 			.then(() => utils.delay(1000))
@@ -88,16 +123,15 @@ module.exports = {
 			.then(() => utils.click({x: 570, y: 538}))
 			// click skip
 			.then(() => utils.click({x: 405, y: 737}))
-			.then(() => utils.delay(1000))
-			.then(() => utils.click({x: 325, y: 787}))
-			.then(() => utils.delay(1000))
-			.then(() => utils.click({x: 325, y: 787}))
-			.then(() => utils.delay(1000))
-			.then(() => utils.click({x: 325, y: 787}))
-			.then(() => utils.delay(1000))
-			.then(() => utils.click({x: 325, y: 787}))
-			.then(() => utils.delay(1000))
-			.then(() => utils.click({x: 325, y: 787}));
+			.then(() => {
+				return Array(6).fill().reduce((previous, item) => {
+					return previous
+						.then(() => utils.delay(1000))
+						.then(() => utils.click({x: 325, y: 787}))
+				}, Promise.resolve());
+			})
+			// close dlg
+			.then(() => utils.click({x: 661, y: 390}))	
 	},
 
 	close() {
