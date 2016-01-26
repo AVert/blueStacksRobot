@@ -7,7 +7,7 @@ module.exports = {
 	open() {
 		return Promise.resolve()
 			.then(() => logger.log('Opening BlueStacks'))
-			.then(() => utils.click({x: 499, y: 867}))
+			.then(() => utils.click({x: 474, y: 870}))
 			.then(() => utils.waitUntil({x: 884, y: 38}, 'b46464', 'Opening launchpad'))
 			.then(() => robot.typeString('BlueStacks'))
 			.then(() => utils.waitUntil({x: 802, y: 110}, '7eb034', 'Searching BlueStacks'))
@@ -63,24 +63,14 @@ module.exports = {
 			.then(() => utils.delay(1000))
 			.then(() => utils.click({x: 150, y: 759}))
 			.then(() => utils.waitUntil({x: 306, y: 398}, 'a53031', 'Dungeon dlg has been opened'))
-			.then(() => utils.click({x: 306, y: 398}))
-			.then(() => utils.waitUntil({x: 441, y: 633}, 'f7df9c', 'Dungeon dlg tab has been changed'))
-			.then(() => utils.click({x: 441, y: 633}))
-			.then(() => utils.delay(500))
-			.then(() => robot.keyToggle('z', 'down', 'shift'))
-			.then(() => {
-				return Array(6).fill().reduce((previous, item) => {
-					return previous
-						.then(() => utils.delay(500))
-						.then(() => robot.scrollMouse(200, 'down'))
-				}, Promise.resolve());
-			})
+			.then(() => utils.scrollRight())
+			.then(() => utils.click({x: 589, y: 630}))
+			.then(() => utils.waitUntil({x: 566, y: 390}, '942421', 'Dungeon dlg category has been changed'))
+			.then(() => robot.moveMouseSmooth(406, 451))
+			.then(() => utils.scrollRight())
 			.then(() => utils.delay(1000))
-			.then(() => robot.keyToggle('z', 'down'))
-			.then(() => utils.delay(1000))
-			.then(() => utils.click({x: 553, y: 567}))
-			.then(() => utils.delay(1000))
-			.then(() => utils.click({x: 481, y: 774}))
+			.then(() => utils.click({x: 447, y: 544}))
+			.then(() => utils.click({x: 463, y: 776}))
 			.then(() => {
 				return Array(20).fill().reduce((previous, item) => {
 					return previous

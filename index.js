@@ -1,3 +1,5 @@
+#!/usr/local/bin/node --harmony_destructuring --harmony_default_parameters
+
 const schedule = require('node-schedule');
 const utils = require('./utils');
 const blueStacks = require('./blueStacks');
@@ -17,7 +19,6 @@ schedule.scheduleJob('0 0 0,6 * * *', () => {
 		.then(() => blueStacks.collectDragon())
 		.then(() => blueStacks.collectBlueCrystals())
 		.then(() => logger.log(`SUCCESS!!`))
-		.catch((err) => logger.log(`ERROR: ${err}`))
+		.catch((err) => logger.log(`ERROR: ${err}`, {isNeedScreen: true}))
 		.then(() => blueStacks.close());
 });
-

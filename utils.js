@@ -20,7 +20,7 @@ module.exports = {
 				} else if(Date.now() - start < TIMEOUT) {
 					setTimeout(check, 500);
 				} else {
-					reject(`Error ${action}, wait for ${coords} ${color}`);
+					reject(`Error ${action}, wait for ${JSON.stringify(coords)} ${color}`);
 				}
 			})();
 		});
