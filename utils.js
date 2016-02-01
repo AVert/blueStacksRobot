@@ -20,7 +20,7 @@ module.exports = {
 				} else if(Date.now() - start < TIMEOUT) {
 					setTimeout(check, 500);
 				} else {
-					reject(`Error ${action}, wait for ${coords} ${color}`);
+					reject(`Error ${action}, wait for ${JSON.stringify(coords)} ${color}`);
 				}
 			})();
 		});
@@ -36,6 +36,58 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => resolve(), time);
 		});
+	},
+
+	scrollTop() {
+		return Promise.resolve()
+			.then(() => robot.keyToggle('z', 'down'))
+			// scroll to top left corner
+			.then(() => {
+				return Array(7).fill().reduce((previous, item) => {
+					return previous
+						.then(() => robot.scrollMouse(200, 'up'))
+						.then(() => this.delay(500))
+				}, Promise.resolve());
+			});
+	},
+
+	scrollLeft() {
+		return Promise.resolve()
+			.then(() => robot.keyToggle('z', 'down', 'shift'))
+			.then(() => {
+				return Array(10).fill().reduce((previous, item) => {
+					return previous
+						.then(() => robot.scrollMouse(200, 'up'))
+						.then(() => this.delay(500))
+				}, Promise.resolve());
+			})
+			.then(() => robot.keyToggle('z', 'down'))
+	},
+
+	scrollRight() {
+		return Promise.resolve()
+			.then(() => robot.keyToggle('z', 'down', 'shift'))
+			.then(() => {
+				return Array(10).fill().reduce((previous, item) => {
+					return previous
+						.then(() => robot.scrollMouse(200, 'down'))
+						.then(() => this.delay(500))
+				}, Promise.resolve());
+			})
+			.then(() => robot.keyToggle('z', 'down'))
+	},
+
+	zoomOut() {
+		return Promise.resolve()
+			.then(() => robot.keyToggle('z', 'down', 'control'))
+			.then(() => {
+				return Array(10).fill().reduce((previous, item) => {
+					return previous
+						.then(() => this.delay(500))
+						.then(() => robot.scrollMouse(200, 'up'))
+				}, Promise.resolve());
+			})
+			.then(() => robot.keyToggle('z', 'down'))
 	},
 
 	initKeyPressLogger() {

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Version</key>
+	<string>0.9.30.423902</string>
+
+	<key>Guests</key>
+	<dict>
+		<key>Android</key>
+		<dict>
+			<key>BootParameters</key>
+			<string>ROOT=/dev/sda1 DATA=/dev/sdb1 SDCARD=/dev/block/sdc1 PREBUNDLEDAPPSFS=/dev/sdd1 HOST=WIN GUID=@@GUID@@ VERSION=@@VERSION@@ OEM=@@OEM@@ LANG=@@LANGUAGE@@ armSwitch=true armApps=true GlMode=@@GLMODE@@ OEMFEATURES=@@OEMFEATURES@@ caCode=@@CACODE@@ country=@@COUNTRY@@</string>
+			<key>Country</key>
+			<string>US</string>
+			<key>Language</key>
+			<string>en_US</string>
+			<key>CACode</key>
+			<string>840</string>
+			<key>OEM</key>
+			<string>BlueStacks</string>
+			<key>OEMFEATURES</key>
+			<integer>480</integer>
+			<key>FrameBuffer</key>
+			<dict>
+				<key>Width</key>
+				<integer>840</integer>
+				<key>Height</key>
+				<integer>480</integer>
+				<key>Depth</key>
+				<integer>16</integer>
+				<key>GlMode</key>
+				<integer>1</integer>
+				<key>HideBootProgress</key>
+				<integer>1</integer>
+			</dict>
+			<key>Config</key>
+			<dict>
+				<key>InputMapperFolder</key>
+				<string>/Users/administrator/Library/BlueStacks/InputMapper</string>
+				<key>InputMapperVerbose</key>
+				<integer>0</integer>
+                <key>SoftControlBarHeightLandscape</key>
+                <integer>48</integer>
+                <key>SoftControlBarHeightPortrait</key>
+                <integer>48</integer>
+			</dict>
+			<key>Network</key>
+			<dict>
+				<key>Redirects</key>
+				<array>
+					<string>5555:TCP</string>
+					<string>9999:TCP</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>
