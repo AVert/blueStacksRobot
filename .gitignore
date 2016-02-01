@@ -7,3 +7,6 @@ npm-debug.log
 
 # log files
 log.txt
+
+# log files
+/pics/*

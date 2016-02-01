@@ -18,7 +18,9 @@ module.exports = {
 	launchClashOfClans() {
 		return Promise.resolve()
 			.then(() => logger.log('Launching Castle Clash'))
-			.then(() => utils.click({x: 745, y: 498}))
+			.then(() => utils.click({x: 747, y: 497}))
+			.then(() => utils.delay(1000))
+			.then(() => utils.click({x: 747, y: 497}))
 			.then(() => utils.waitUntil({x: 100, y: 655}, 'fbddca', 'Searching Castle Clash'))
 			.then(() => utils.click({x: 100, y: 655}))
 			.then(() => utils.waitUntil({x: 681, y: 390}, 'ff8e00', 'Waiting castle clash loading'))
@@ -53,6 +55,7 @@ module.exports = {
 			.then(() => utils.click({x: 248, y: 391}))
 			.then(() => utils.waitUntil({x: 639, y: 648}, '42385a', 'Daily reward dlg has been tab changed'))
 			.then(() => utils.click({x: 604, y: 694}))
+			.then(() => utils.delay(1000))
 			.then(() => utils.click({x: 679, y: 394}));
 	},
 
